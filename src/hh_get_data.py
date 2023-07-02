@@ -16,40 +16,22 @@ class HH_vacancies_employers(AbstarctApiClass):
         }
 
     def get_vacancies(self) -> list[dict]:
+        """ Получаем вакансии у заданных по id работодателей"""
+
         response = requests.get(self.url, params=self.params)
 
         return response.json()['items']
 
     def get_employers(self) -> list[dict]:
+        """ Получаем список работодателей, их id и ссылку на страницу работодаьеля в hh.ru"""
 
         result = [
             {
-            "id": uid,
-            "name": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('name'),
-            "url": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('alternate_url'),
+                "id": uid,
+                "name": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('name'),
+                "url": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('alternate_url'),
 
-         }
-         for uid in self.params.get('employer_id') if uid is not None
+            }
+            for uid in self.params.get('employer_id') if uid is not None
         ]
         return result
-
-if __name__ == '__main__':
-
-    hh = HH_vacancies_employers()
-    # print(hh.get_vacancies())
-    for i in hh.get_employers():
-        print(i)
-
-# result = []
-# employer_ids = self.params.get('employer_id')
-# if employer_ids is not None:
-#     for uid in employer_ids:
-#         if uid is not None:
-#             response = requests.get(f'https://api.hh.ru/employers/{uid}').json()
-#             result.append({
-#                 "id": uid,
-#                 "name": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('name'),
-#                 "url": requests.get(f'https://api.hh.ru/employers/{uid}').json().get('alternate_url'),
-#             })
-#
-#             return result
