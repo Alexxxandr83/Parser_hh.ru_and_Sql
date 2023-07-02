@@ -1,6 +1,6 @@
 from DBManager import DBManager
 from hh_get_data import HH_vacancies_employers
-from utils import insert_vacansy_data_to_db, insert_employer_data_to_db
+from insert_data import insert_vacansy_data_to_db, insert_employer_data_to_db
 
 if __name__ == '__main__':
     # Подключаемся к БД
