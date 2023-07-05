@@ -10,6 +10,7 @@ packages = [{include = "parser_hh"}]
 python = "^3.11"
 requests = "^2.31.0"
 psycopg2 = "^2.9.6"
+python-dotenv = "^1.0.0"
 
 
 [build-system]

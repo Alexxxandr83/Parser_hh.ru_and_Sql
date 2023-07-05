@@ -27,13 +27,13 @@ VALUES (%s, %s, %s, %s, %s);
 --Получение списка всех компаний и количества вакансий
 SELECT employers.name, COUNT(vacancies.id)
 FROM employers
-JOIN vacancies ON employers.id = vacancies.company_id
+         JOIN vacancies ON employers.id = vacancies.company_id
 GROUP BY employers.name;
 
 --Получение списка всех вакансий
 SELECT employers.name, vacancies.name, vacancies.salary_from, vacancies.salary_to, vacancies.url
 FROM vacancies
-JOIN employers ON vacancies.company_id = employers.id;
+         JOIN employers ON vacancies.company_id = employers.id;
 
 --Получение средней зарплаты по вакансиям
 SELECT AVG(salary_from), AVG(salary_to)
@@ -42,11 +42,13 @@ FROM vacancies;
 --Получение списка вакансий с зарплатой выше средней
 SELECT employers.name, vacancies.name, vacancies.salary_from, vacancies.salary_to, vacancies.url
 FROM vacancies
-JOIN employers ON vacancies.company_id = employers.id
-WHERE (vacancies.salary_from > %s OR vacancies.salary_to > %s);
+         JOIN employers ON vacancies.company_id = employers.id
+GROUP BY employers.name, vacancies.name, vacancies.salary_from, vacancies.salary_to, vacancies.url
+HAVING (vacancies.salary_from > (SELECT AVG(salary_from) FROM vacancies) OR
+        vacancies.salary_to > (SELECT AVG(salary_to) FROM vacancies));
 
 --Получение списка вакансий
 SELECT employers.name, vacancies.name, vacancies.salary_from, vacancies.salary_to, vacancies.url
 FROM vacancies
-JOIN employers ON vacancies.company_id = employers.id
+         JOIN employers ON vacancies.company_id = employers.id
 WHERE vacancies.name ILIKE %s;

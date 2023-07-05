@@ -54,11 +54,12 @@ class DBManager():
             return results
 
     def get_vacancies_with_higher_salary(self):
+        avg_salary = self.get_avg_salary()
         with self.conn.cursor() as cur:
             with open(self.queries, 'r', encoding='utf-8') as f:
                 queries = f.read().split(';')
                 query = queries[7].strip()
-                cur.execute(query)
+                cur.execute(query, avg_salary)
             results = cur.fetchall()
             return results
 
@@ -67,10 +68,11 @@ class DBManager():
             with open(self.queries, 'r', encoding='utf-8') as f:
                 queries = f.read().split(';')
                 query = queries[8].strip()
-                cur.execute(query)
-            results = cur.fetchall()
+                cur.execute(query, (f"%{keyword}%)",))
+                results = cur.fetchall()
             return results
 
     def close_connection(self):
-
         self.conn.close()
+
+# (f"%{keyword}%)",))
