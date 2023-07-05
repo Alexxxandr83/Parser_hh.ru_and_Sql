@@ -74,5 +74,3 @@ class DBManager():
 
     def close_connection(self):
         self.conn.close()
-
-# (f"%{keyword}%)",))
