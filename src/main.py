@@ -27,7 +27,7 @@ if __name__ == '__main__':
     insert_vacansy_data_to_db(vacansy_list, db)
 
     print(f'Колличество вакансий у выбранных работодателей:{db.get_companies_and_vacansies_count()}')
-    print(f'Все вакансии выбранных работодаьелей: {db.all_vacansies()}')
+    print(f'Все вакансии выбранных работодаьелей: {db.all_vacancies()}')
     print(f'Размер средней зарплаты по вакансиям: {db.get_avg_salary()}')
     print(f'Вакансии с зарплатой выше средней: {db.get_vacancies_with_higher_salary()}')
     user_input = input('Введите ключевое слово для поиска: ')

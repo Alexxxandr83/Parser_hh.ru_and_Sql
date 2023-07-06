@@ -5,6 +5,22 @@ from src.config import hh_api_config
 
 
 class HH_vacancies_employers(AbstarctApiClass):
+    """
+    Класс для взаимодействия с API hh.ru для получения информации о вакансиях работодателей.
+
+    Параметры:
+    - page: int, необязательный, номер страницы для пагинации (значение по умолчанию: 0)
+
+    Атрибуты:
+    - url: str, базовый URL для API hh.ru
+    - params: dict, параметры запроса для API hh.ru, которые включают:
+        - page: int, номер страницы для пагинации
+        - employer_id: str, ID работодателя
+        - only_with_salary: bool, флаг указывающий на отбор только вакансий с указанной зарплатой
+        - per_page: int, количество вакансий на одной странице
+        - area: str, регион для поиска вакансий
+        """
+
     def __init__(self, page: int = 0):
         self.url = "https://api.hh.ru/vacancies"
         self.params = {
