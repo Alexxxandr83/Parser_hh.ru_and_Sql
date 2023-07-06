@@ -1,4 +1,4 @@
-from typing import Dict, List, Any
+from typing import dict, list, Any
 
 hh_api_config: dict[str, int | list[str | Any] | bool] = {
     'employers_ids': [

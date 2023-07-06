@@ -128,7 +128,7 @@ class DBManager():
                 results = cur.fetchall()
             return results
 
-    def close_connection(self):
+    def close_connection(self) -> None:
         """
          Закрывает соединение с базой данных.
          """

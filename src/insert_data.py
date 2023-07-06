@@ -1,4 +1,14 @@
-def insert_vacansy_data_to_db(data, db):
+def insert_vacansy_data_to_db(data: list[dict[str, any]], db: any) -> None:
+    """
+    Вставляет данные о вакансиях в базу данных.
+
+    Аргументы:
+    - data (List[Dict[str, Any]]): Список словарей с данными о вакансиях.
+    - db (Any): Объект подключения к базе данных.
+
+    Возвращаемое значение:
+    - None
+    """
     with db.conn.cursor() as cur:
         for vacancy in data:
             cur.execute("""
@@ -16,7 +26,20 @@ def insert_vacansy_data_to_db(data, db):
             db.conn.commit()
 
 
-def insert_employer_data_to_db(data, db):
+def insert_employer_data_to_db(data: list[dict[str, any]], db: any) -> None:
+    """
+    Вставляет данные о работодателях в базу данных.
+
+    Аргументы:
+    - data (List[Dict[str, Any]]): Список словарей с данными о работодателях.
+    - db (Any): Объект подключения к базе данных.
+
+    Возвращаемое значение:
+    - None
+
+    Исключения:
+    - Ошибки, связанные с базой данных.
+    """
     with db.conn.cursor() as cur:
         for employer in data:
             cur.execute("""UPDATE employers SET name = %s, url = %s WHERE id = %s;""",

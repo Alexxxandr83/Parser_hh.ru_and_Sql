@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 from abstract_class import AbstarctApiClass
 
